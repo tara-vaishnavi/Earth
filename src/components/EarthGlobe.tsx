@@ -1,13 +1,30 @@
-import { useRef, useMemo, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import StarField from "./StarField";
 
-function Earth() {
+function usePrefersReducedMotion() {
+  const [reducedMotion, setReducedMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener("change", updatePreference);
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
+
+  return reducedMotion;
+}
+
+function Earth({ reducedMotion }: { reducedMotion: boolean }) {
+  const groupRef = useRef<THREE.Group>(null);
   const meshRef = useRef<THREE.Mesh>(null);
   const cloudsRef = useRef<THREE.Mesh>(null);
   const atmosphereRef = useRef<THREE.Mesh>(null);
+  const { pointer } = useThree();
 
   const textures = useTexture({
     map: "https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg",
@@ -19,50 +36,63 @@ function Earth() {
       "https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_clouds_1024.png",
   });
 
-  const cloudTexture = textures.clouds;
-
   useFrame((_, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.08;
+    const drift = delta * 0.08;
+
+    if (groupRef.current) {
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(
+        groupRef.current.rotation.x,
+        reducedMotion ? 0.2 : pointer.y * 0.35 + 0.2,
+        reducedMotion ? 1 : 0.04,
+      );
+      if (!reducedMotion) groupRef.current.rotation.y += drift;
+      groupRef.current.rotation.z = THREE.MathUtils.lerp(
+        groupRef.current.rotation.z,
+        reducedMotion ? 0 : pointer.x * 0.25,
+        reducedMotion ? 1 : 0.04,
+      );
     }
-    if (cloudsRef.current) {
-      cloudsRef.current.rotation.y += delta * 0.1;
+
+    if (meshRef.current && !reducedMotion) {
+      meshRef.current.rotation.y += drift * 1.2;
     }
-    if (atmosphereRef.current) {
-      atmosphereRef.current.rotation.y += delta * 0.05;
+
+    if (cloudsRef.current && !reducedMotion) {
+      cloudsRef.current.rotation.y += delta * 0.14;
+    }
+
+    if (atmosphereRef.current && !reducedMotion) {
+      atmosphereRef.current.rotation.y += delta * 0.06;
     }
   });
 
-  const atmosphereGeometry = useMemo(() => new THREE.SphereGeometry(1.6, 64, 64), []);
+  const atmosphereGeometry = useMemo(() => new THREE.SphereGeometry(1.7, 64, 64), []);
 
   return (
-    <group>
-      {/* Earth surface */}
-      <mesh ref={meshRef}>
+    <group ref={groupRef}>
+      <mesh ref={meshRef} scale={1.08}>
         <sphereGeometry args={[1.5, 64, 64]} />
         <meshPhongMaterial
           map={textures.map}
           specularMap={textures.specularMap}
           normalMap={textures.normalMap}
           specular={new THREE.Color(0x333333)}
-          shininess={15}
+          shininess={18}
           bumpScale={0.05}
         />
       </mesh>
 
-      {/* Clouds layer */}
-      <mesh ref={cloudsRef}>
+      <mesh ref={cloudsRef} scale={1.08}>
         <sphereGeometry args={[1.53, 64, 64]} />
         <meshPhongMaterial
-          map={cloudTexture}
+          map={textures.clouds}
           transparent
-          opacity={0.4}
+          opacity={0.45}
           depthWrite={false}
         />
       </mesh>
 
-      {/* Atmosphere glow */}
-      <mesh ref={atmosphereRef} geometry={atmosphereGeometry}>
+      <mesh ref={atmosphereRef} geometry={atmosphereGeometry} scale={1.08}>
         <shaderMaterial
           vertexShader={`
             varying vec3 vNormal;
@@ -74,8 +104,8 @@ function Earth() {
           fragmentShader={`
             varying vec3 vNormal;
             void main() {
-              float intensity = pow(0.65 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.0);
-              gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity;
+              float intensity = pow(0.7 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.0);
+              gl_FragColor = vec4(0.2, 0.7, 1.0, 1.0) * intensity;
             }
           `}
           blending={THREE.AdditiveBlending}
@@ -90,9 +120,10 @@ function Earth() {
 function SceneLighting() {
   return (
     <>
-      <ambientLight intensity={0.25} />
-      <directionalLight position={[5, 3, 5]} intensity={2.2} color="#ffffff" />
-      <pointLight position={[-5, -2, -5]} intensity={0.8} color="#3b82f6" />
+      <ambientLight intensity={0.28} />
+      <directionalLight position={[5, 3, 5]} intensity={2.4} color="#ffffff" />
+      <pointLight position={[-6, -2, -4]} intensity={0.9} color="#3b82f6" />
+      <pointLight position={[4, -3, 6]} intensity={0.8} color="#67e8f9" />
     </>
   );
 }
@@ -102,17 +133,15 @@ interface EarthGlobeProps {
 }
 
 export default function EarthGlobe({ className = "" }: EarthGlobeProps) {
+  const reducedMotion = usePrefersReducedMotion();
+
   return (
     <div className={className}>
-      <Canvas
-        camera={{ position: [0, 0, 4], fov: 45 }}
-        gl={{ antialias: true, alpha: true }}
-        dpr={[1, 2]}
-      >
+      <Canvas camera={{ position: [0, 0, 4.2], fov: 42 }} gl={{ antialias: true, alpha: true }} dpr={[1, 2]}>
         <Suspense fallback={null}>
           <SceneLighting />
-          <Earth />
-          <StarField count={2500} />
+          <Earth reducedMotion={reducedMotion} />
+          <StarField count={1800} />
         </Suspense>
       </Canvas>
     </div>

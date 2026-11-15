@@ -1,75 +1,92 @@
-import { lazy, Suspense } from "react";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { lazy, Suspense, useState, type MouseEvent } from "react";
+import { ArrowRight, Satellite, Sparkles } from "lucide-react";
 
 const EarthGlobe = lazy(() => import("@/components/EarthGlobe"));
 
 export default function Hero() {
+  const [buttonMotion, setButtonMotion] = useState({ x: 0, y: 0, scale: 1 });
+
   const scrollToExplore = () => {
-    document.querySelector("#explore")?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector("#investigation")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleMouseMove = (event: MouseEvent<HTMLButtonElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const offsetX = (event.clientX - (rect.left + rect.width / 2)) * 0.12;
+    const offsetY = (event.clientY - (rect.top + rect.height / 2)) * 0.12;
+    setButtonMotion({ x: offsetX, y: offsetY, scale: 1.04 });
   };
 
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-16"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0e27] to-[#0d1b3e]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(8,47,73,0.5),transparent_70%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#020610] via-[#071425] to-[#0b1d3d]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(14,116,144,0.26),transparent_62%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(59,130,246,0.14),transparent_40%)]" />
 
-      {/* Globe */}
-      <div className="absolute inset-0 z-10">
-        <Suspense fallback={<div className="w-full h-full" />}>
-          <EarthGlobe className="w-full h-full" />
+      <div className="hero-astral" aria-hidden="true">
+        <span className="shooting-star shooting-star-one" />
+        <span className="shooting-star shooting-star-two" />
+        <span className="shooting-star shooting-star-three" />
+        <div className="satellite-orbit satellite-orbit-one">
+          <Satellite className="hero-satellite satellite-one" size={18} />
+        </div>
+        <div className="satellite-orbit satellite-orbit-two">
+          <Satellite className="hero-satellite satellite-two" size={14} />
+        </div>
+        <div className="satellite-orbit satellite-orbit-three">
+          <Satellite className="hero-satellite satellite-three" size={12} />
+        </div>
+      </div>
+
+      <div className="absolute inset-0 z-10 opacity-90">
+        <Suspense fallback={<div className="h-full w-full" />}>
+          <EarthGlobe className="h-full w-full" />
         </Suspense>
       </div>
 
-      {/* Content overlay */}
-      <div className="relative z-20 flex flex-col items-center text-center px-6 max-w-4xl mx-auto pointer-events-none">
-        <div className="pointer-events-auto inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/30 backdrop-blur-sm mb-8 animate-[fadeInUp_0.8s_ease-out]">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-          <span className="text-xs font-medium tracking-[0.2em] text-cyan-200">
-            NASA EARTH SCIENCE PROJECT
+      <div className="pointer-events-none relative z-20 mx-auto flex max-w-5xl flex-col items-center px-6 text-center">
+        <div className="pointer-events-auto mb-7 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 px-4 py-1.5 backdrop-blur-sm">
+          <Sparkles className="h-3.5 w-3.5 text-cyan-300" />
+          <span className="text-[10px] font-medium tracking-[0.28em] text-cyan-100 uppercase">
+            NASA SPACE APPS CHALLENGE
           </span>
         </div>
 
-        <h1 className="pointer-events-auto text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-wide text-white leading-tight animate-[fadeInUp_1s_ease-out_0.2s_both] drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]">
-          THE EARTH IS CONSTANTLY CHANGING.
+        <h1 className="pointer-events-auto max-w-5xl text-4xl font-bold uppercase leading-[0.9] tracking-[-0.04em] text-white sm:text-5xl md:text-6xl lg:text-[6rem] drop-shadow-[0_0_35px_rgba(34,211,238,0.35)]">
+          THE EARTH IS SPEAKING.
           <br />
-          <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-violet-400 bg-clip-text text-transparent">
-            ARE YOU READY TO DISCOVER HOW?
+          <span className="bg-gradient-to-r from-cyan-200 via-blue-400 to-violet-400 bg-clip-text text-transparent">
+            ARE WE OBSERVING?
           </span>
         </h1>
 
-        <p className="pointer-events-auto mt-6 text-sm sm:text-base text-gray-300/80 max-w-2xl leading-relaxed animate-[fadeInUp_1s_ease-out_0.4s_both]">
-          Explore Earth's environmental patterns through satellite observations,
-          scientific data and meaningful discoveries.
+        <p className="pointer-events-auto mt-6 max-w-2xl text-lg text-slate-200/80 md:text-xl">
+          Decoding the patterns of a living planet.
         </p>
 
         <button
+          type="button"
           onClick={scrollToExplore}
-          className="pointer-events-auto mt-10 group relative px-8 py-3.5 rounded-full text-sm font-bold tracking-widest text-white
-            bg-gradient-to-r from-cyan-500/20 to-blue-600/20 border border-cyan-400/40 backdrop-blur-sm
-            hover:from-cyan-500/40 hover:to-blue-600/40 hover:border-cyan-300/70
-            transition-all duration-500 hover:scale-105
-            animate-[fadeInUp_1s_ease-out_0.6s_both]"
-          style={{ boxShadow: "0 0 20px rgba(34,211,238,0.2)" }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => setButtonMotion({ x: 0, y: 0, scale: 1 })}
+          onPointerDown={() => setButtonMotion((motion) => ({ ...motion, scale: 0.97 }))}
+          onPointerUp={() => setButtonMotion((motion) => ({ ...motion, scale: 1.04 }))}
+          className="electric-cta hero-cta group pointer-events-auto mt-10"
+          style={{
+            transform: `translate(${buttonMotion.x}px, ${buttonMotion.y}px) scale(${buttonMotion.scale})`,
+          }}
         >
-          <span className="relative z-10 flex items-center gap-2">
-            EXPLORE THE EARTH
-            <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-          </span>
-          <span
-            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            style={{ boxShadow: "0 0 30px rgba(34,211,238,0.6)" }}
-          />
+          EXPLORE THE EARTH
+          <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
         </button>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-[bounce_2s_ease-in-out_infinite]">
-        <div className="w-6 h-10 rounded-full border-2 border-cyan-400/30 flex items-start justify-center p-1.5">
-          <div className="w-1 h-2 rounded-full bg-cyan-400/60" />
+      <div className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 animate-[bounce_2s_ease-in-out_infinite]">
+        <div className="flex h-10 w-6 items-start justify-center rounded-full border border-cyan-400/30 p-1.5">
+          <div className="h-2 w-1 rounded-full bg-cyan-300/80" />
         </div>
       </div>
     </section>

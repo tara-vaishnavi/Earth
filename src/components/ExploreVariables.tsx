@@ -1,73 +1,79 @@
-import { useState } from "react";
-import { earthVariables, type EarthVariable } from "@/data/earthVariables";
-import VariableCard from "./VariableCard";
-import VariableDetailModal from "./VariableDetailModal";
+import InvestigationPanel, {
+  type InvestigationPanelData,
+} from "@/components/InvestigationPanel";
+
+const investigations: InvestigationPanelData[] = [
+  {
+    id: "temperature-ozone",
+    number: "01",
+    title: "TEMPERATURE & OZONE",
+    description:
+      "Earth's atmosphere and surface reveal changing temperature patterns. Satellite observations help scientists study atmospheric temperatures and monitor ozone distribution across the planet.",
+    kind: "temperature",
+    query: "NASA Earth temperature map ozone atmosphere satellite",
+  },
+  {
+    id: "water-rainfall-vegetation",
+    number: "02",
+    title: "WATER, RAINFALL & VEGETATION",
+    description:
+      "Water availability, rainfall and vegetation are closely connected. NASA observations help scientists examine precipitation patterns, drought conditions and changes in vegetation across different ecosystems.",
+    kind: "water",
+    query: "NASA global precipitation rainfall vegetation forest satellite",
+  },
+  {
+    id: "air-quality-pollution",
+    number: "03",
+    title: "AIR QUALITY & POLLUTION",
+    description:
+      "Satellite instruments help scientists observe aerosols and atmospheric gases, track pollution patterns and understand how air composition changes across regions.",
+    kind: "air",
+    query: "NASA TEMPO air quality atmospheric aerosols pollution satellite",
+  },
+];
 
 export default function ExploreVariables() {
-  const [selected, setSelected] = useState<EarthVariable | null>(null);
-  const [hoveredColor, setHoveredColor] = useState<string | null>(null);
-
   return (
     <section
-      id="explore"
-      className="relative py-24 lg:py-32 transition-colors duration-700 overflow-hidden"
-      style={{
-        background: hoveredColor
-          ? `radial-gradient(ellipse at 50% 30%, rgba(${hoveredColor}, 0.12), transparent 60%), #050810`
-          : "#050810",
-      }}
+      id="investigation"
+      className="relative overflow-hidden bg-[#050a13] py-24 text-white md:py-32"
     >
-      {/* Grid texture */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(34,211,238,0.07),transparent_42%)]" />
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.035]"
+        aria-hidden="true"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Section header */}
-        <div className="text-center mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-xs font-medium tracking-[0.2em] text-gray-300">
-              ENVIRONMENTAL VARIABLES
-            </span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-wide text-white leading-tight">
-            EXPLORE THE SIX DIMENSIONS
-            <br />
-            <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-violet-400 bg-clip-text text-transparent">
-              OF OUR CHANGING EARTH
-            </span>
-          </h2>
-          <p className="text-sm sm:text-base text-gray-400 max-w-xl mx-auto">
-            Choose a variable. Discover a pattern. Understand the change.
+      <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <header className="mb-14 max-w-4xl md:mb-20">
+          <p className="section-eyebrow">
+            <span className="section-eyebrow-dot" />
+            FIELD NOTES / EARTH SYSTEMS
           </p>
-        </div>
+          <h2 className="mt-5 max-w-4xl text-3xl font-semibold uppercase leading-[0.98] tracking-[-0.045em] text-white sm:text-5xl lg:text-6xl">
+            THE PLANET LEAVES CLUES.
+            <br />
+            <span className="text-cyan-200">WE INVESTIGATE.</span>
+          </h2>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
+            Three interconnected perspectives. A deeper understanding of our changing planet.
+          </p>
+        </header>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {earthVariables.map((variable) => (
-            <div
-              key={variable.id}
-              onMouseEnter={() => setHoveredColor(variable.accentFrom)}
-              onMouseLeave={() => setHoveredColor(null)}
-            >
-              <VariableCard
-                variable={variable}
-                onLearnMore={setSelected}
-              />
-            </div>
+        <div className="space-y-7 md:space-y-9">
+          {investigations.map((investigation) => (
+            <InvestigationPanel
+              key={investigation.id}
+              investigation={investigation}
+            />
           ))}
         </div>
       </div>
-
-      <VariableDetailModal
-        variable={selected}
-        onClose={() => setSelected(null)}
-      />
     </section>
   );
 }

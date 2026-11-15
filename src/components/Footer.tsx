@@ -1,159 +1,204 @@
-import { Globe2, Github, ExternalLink, Heart } from "lucide-react";
-
-// ═══════════════════════════════════════════════════════════════════
-//  EDIT THE PLACEHOLDERS BELOW — Replace with your team's information
-// ═══════════════════════════════════════════════════════════════════
+import { ArrowRight, ExternalLink, Github, Globe2, Satellite } from "lucide-react";
 
 const teamMembers: { name: string; githubUsername: string }[] = [
-  { name: "[Team Member 1]", githubUsername: "github-username-1" },
-  { name: "[Team Member 2]", githubUsername: "github-username-2" },
-  { name: "[Team Member 3]", githubUsername: "github-username-3" },
-  { name: "[Team Member 4]", githubUsername: "github-username-4" },
-  { name: "[Team Member 5]", githubUsername: "github-username-5" },
+  { name: "[Team member name]", githubUsername: "[GitHub username]" },
+  { name: "[Team member name]", githubUsername: "[GitHub username]" },
+  { name: "[Team member name]", githubUsername: "[GitHub username]" },
+  { name: "[Team member name]", githubUsername: "[GitHub username]" },
+  { name: "[Team member name]", githubUsername: "[GitHub username]" },
 ];
 
-const REPOSITORY_URL = "https://github.com/your-org/earth-pulse";
+const REPOSITORY_URL = "";
 
-// ═══════════════════════════════════════════════════════════════════
-
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Explore Variables", href: "#explore" },
-  { label: "About", href: "#about" },
-  { label: "Our Team", href: "#team" },
+const scienceResources = [
+  {
+    title: "Earth temperature & atmosphere",
+    organization: "NASA Earth Science",
+    url: "https://science.nasa.gov/earth-science/",
+  },
+  {
+    title: "Ozone monitoring",
+    organization: "NASA Ozone Watch",
+    url: "https://ozonewatch.gsfc.nasa.gov/",
+  },
+  {
+    title: "Water & precipitation",
+    organization: "Global Precipitation Measurement",
+    url: "https://gpm.nasa.gov/",
+  },
+  {
+    title: "Vegetation & forests",
+    organization: "NASA Earth Observatory",
+    url: "https://earthobservatory.nasa.gov/features/GlobalGarden",
+  },
+  {
+    title: "Air quality & composition",
+    organization: "NASA Atmospheric Composition",
+    url: "https://airquality.gsfc.nasa.gov/",
+  },
+  {
+    title: "Satellite pollution monitoring",
+    organization: "NASA TEMPO Mission",
+    url: "https://tempo.si.edu/",
+  },
 ];
+
+function isConfigured(value: string) {
+  return value.length > 0 && !value.includes("[");
+}
 
 export default function Footer() {
-  const handleNavClick = (href: string) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <footer
       id="team"
-      className="relative pt-24 pb-12 overflow-hidden border-t border-white/10"
+      className="relative overflow-hidden border-t border-cyan-100/10 bg-[#020711] px-5 pb-8 pt-24 sm:px-8 lg:px-12"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050810] to-[#02040a]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(34,211,238,0.06),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(34,211,238,0.12),transparent_44%),linear-gradient(180deg,#020711_0%,#030916_100%)]" />
+      <div className="footer-stars" aria-hidden="true" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Top section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
-          {/* Brand & description */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Globe2 className="w-8 h-8 text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
-              <span className="text-xl font-bold tracking-[0.2em] text-white">
-                EARTH<span className="text-cyan-400">PULSE</span>
-              </span>
-            </div>
-            <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
-              An interactive NASA Earth Science project exploring our planet's
-              environmental changes through satellite observations, scientific
-              data, and meaningful discoveries.
-            </p>
-            <p className="text-xs text-cyan-300/60 tracking-wide pt-2">
-              "Every Change Leaves a Clue. Discover Earth's Story."
-            </p>
+      <div className="relative mx-auto max-w-[1440px]">
+        <div className="mb-14 text-center md:mb-20">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-500/10 px-4 py-2 text-[9px] font-semibold tracking-[0.3em] text-cyan-100">
+            <span className="section-eyebrow-dot" />
+            MISSION PERSONNEL
           </div>
-
-          {/* Quick links */}
-          <div className="space-y-4">
-            <h4 className="text-sm font-bold tracking-[0.2em] text-white/70 uppercase">
-              Navigation
-            </h4>
-            <ul className="space-y-2.5">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <button
-                    onClick={() => handleNavClick(link.href)}
-                    className="text-sm text-gray-400 hover:text-cyan-300 transition-colors duration-300"
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Repository link */}
-          <div className="space-y-4">
-            <h4 className="text-sm font-bold tracking-[0.2em] text-white/70 uppercase">
-              Project Repository
-            </h4>
-            <a
-              href={REPOSITORY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-white/5 border border-white/10
-                hover:bg-cyan-500/10 hover:border-cyan-400/30 transition-all duration-300 group"
-            >
-              <Github className="w-5 h-5 text-gray-300 group-hover:text-cyan-300 transition-colors" />
-              <span className="text-sm text-gray-300 group-hover:text-cyan-200 transition-colors">
-                View on GitHub
-              </span>
-              <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-cyan-400 transition-colors" />
-            </a>
-            <p className="text-xs text-gray-500 leading-relaxed">
-              The complete source code for this website is available in our
-              public repository.
-            </p>
-          </div>
+          <p className="text-[clamp(3.2rem,10vw,8rem)] font-semibold uppercase leading-[0.85] tracking-[-0.09em] text-white">
+            VOLTZ <span className="text-cyan-300">7</span>
+          </p>
+          <h2 className="mt-8 text-2xl font-semibold uppercase leading-tight tracking-[-0.04em] text-white sm:text-4xl">
+            THE MINDS BEHIND THE MISSION
+          </h2>
+          <p className="mt-4 text-base text-slate-300">
+            Curiosity brought us together. Science drives our exploration.
+          </p>
+          <p className="mx-auto mt-7 max-w-3xl text-sm leading-relaxed text-slate-400 sm:text-base">
+            We explore Earth&apos;s changing environmental systems through satellite observations,
+            data visualisation and scientific trend analysis.
+          </p>
         </div>
 
-        {/* Team section */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            <h3 className="text-sm font-bold tracking-[0.3em] text-white/70 uppercase">
-              Our Team
-            </h3>
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-          </div>
+        <div className="mb-16 grid gap-10 lg:grid-cols-[0.85fr_1.5fr]">
+          <section className="rounded-[28px] border border-cyan-200/15 bg-slate-950/60 p-6 sm:p-8">
+            <div className="mb-5 flex items-center gap-3">
+              <Globe2 className="h-5 w-5 text-cyan-300" />
+              <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-100">
+                Project repository
+              </h3>
+            </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            {teamMembers.map((member, index) => (
+            {isConfigured(REPOSITORY_URL) ? (
               <a
-                key={index}
-                href={`https://github.com/${member.githubUsername}`}
+                href={REPOSITORY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col items-center gap-3 p-5 rounded-xl bg-white/[0.03] border border-white/10
-                  hover:bg-white/[0.07] hover:border-cyan-400/30 transition-all duration-500 hover:-translate-y-1"
+                className="repository-cta"
               >
-                <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center
-                    bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-400/20
-                    group-hover:scale-110 transition-transform duration-500"
-                  style={{
-                    boxShadow: "0 0 0 0 rgba(34,211,238,0)",
-                  }}
-                >
-                  <Github className="w-6 h-6 text-gray-300 group-hover:text-cyan-300 transition-colors" />
-                </div>
-                <div className="text-center">
-                  <p className="text-sm font-semibold text-white group-hover:text-cyan-200 transition-colors">
-                    {member.name}
-                  </p>
-                  <p className="text-xs text-gray-500 mt-0.5">
-                    @{member.githubUsername}
-                  </p>
-                </div>
+                EXPLORE OUR GITHUB REPOSITORY
+                <ArrowRight size={18} />
+              </a>
+            ) : (
+              <button
+                type="button"
+                className="repository-cta repository-cta-disabled"
+                disabled
+                title="Add the project repository URL to enable this link"
+              >
+                EXPLORE OUR GITHUB REPOSITORY
+                <ArrowRight size={18} />
+              </button>
+            )}
+
+            <p className="mt-4 text-xs leading-relaxed text-slate-500">
+              The repository link will be enabled once the project URL is added.
+            </p>
+          </section>
+
+          <section className="rounded-[28px] border border-white/10 bg-slate-950/60 p-6 sm:p-8">
+            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-100">
+              Team profiles
+            </h3>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+              {teamMembers.map((member, index) => {
+                const profileUrl = isConfigured(member.githubUsername)
+                  ? `https://github.com/${member.githubUsername}`
+                  : null;
+
+                return (
+                  <div key={`${member.name}-${index}`} className="team-profile">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-cyan-300/20 bg-cyan-400/10">
+                      <Github size={17} className="text-cyan-200" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium text-white">{member.name}</p>
+                      <p className="mt-0.5 truncate text-xs text-slate-400">{member.githubUsername}</p>
+                    </div>
+                    {profileUrl ? (
+                      <a
+                        href={profileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="team-profile-link"
+                        aria-label={`Open ${member.name}'s GitHub profile`}
+                      >
+                        <ExternalLink size={15} />
+                      </a>
+                    ) : (
+                      <span className="team-profile-pending" aria-label="Profile link pending">
+                        <ExternalLink size={15} />
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        </div>
+
+        <section className="mb-16">
+          <div className="mb-7 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="section-eyebrow">
+                <span className="section-eyebrow-dot" />
+                OPEN SCIENCE / NASA
+              </p>
+              <h3 className="mt-4 text-2xl font-semibold uppercase tracking-[-0.035em] text-white sm:text-3xl">
+                EXPLORE THE SCIENCE BEHIND THE MISSION
+              </h3>
+            </div>
+            <Satellite className="hidden h-8 w-8 text-cyan-300/60 sm:block" />
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {scienceResources.map((resource) => (
+              <a
+                key={resource.title}
+                href={resource.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="science-resource"
+              >
+                <span>
+                  <span className="science-resource-title">{resource.title}</span>
+                  <span className="science-resource-org">{resource.organization}</span>
+                </span>
+                <ExternalLink size={16} className="shrink-0 text-cyan-200" />
               </a>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* Bottom bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-xs text-gray-500">
-            <span>A NASA Earth Science Project</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-xs text-gray-500">
-            <span>Built with</span>
-            <Heart className="w-3.5 h-3.5 text-cyan-400/60 fill-current" />
-            <span>for our planet</span>
-          </div>
+        <div className="flex flex-col gap-3 border-t border-white/10 pt-6 text-[10px] font-medium tracking-[0.18em] text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>VOLTZ 7 <span className="mx-2 text-cyan-400">|</span> NASA SPACE APPS CHALLENGE</p>
+          <a
+            href="#home"
+            className="uppercase transition-colors hover:text-cyan-200"
+            onClick={(event) => {
+              event.preventDefault();
+              document.querySelector("#home")?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Back to orbit ↑
+          </a>
         </div>
       </div>
     </footer>

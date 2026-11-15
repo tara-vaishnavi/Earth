@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-black text-white antialiased selection:bg-cyan-500/30 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-[#020711] text-white antialiased selection:bg-cyan-500/30 selection:text-white">
       <Header />
       <main>
         <Hero />

@@ -5,3 +5,352 @@ By default, this template supports JSX syntax with Tailwind CSS classes, React h
 Use icons from lucide-react for logos.
 
 Import project modules with the `@/` path alias, which maps to `src/` (e.g. `@/components/Foo` == `src/components/Foo`), instead of deep relative paths like `../../components/Foo`.
+# PROJECT: VOLTZ 7 — NASA SPACE APPS CHALLENGE
+
+Redesign and enhance my EXISTING website into a premium, cinematic, futuristic Earth investigation platform.
+
+IMPORTANT:
+First examine the existing project, its code and components. Modify the existing website rather than creating an unrelated project from scratch. Preserve useful existing functionality.
+
+Our official team name is **VOLTZ 7**.
+
+The website should look like a professionally designed scientific exploration platform, combining satellite observation, space exploration and environmental investigation.
+
+The entire website must have FOUR main sections connected through smooth vertical scrolling.
+
+Use a consistent dark space-inspired theme throughout.
+
+---
+
+# 1. FIRST SECTION — THE EARTH EXPERIENCE
+
+This must create an unforgettable first impression.
+
+### Branding
+Replace all previous branding with:
+
+**VOLTZ 7**
+
+Display the team name elegantly in the top navigation bar.
+
+### Main visual — 3D Earth
+
+Place a HUGE, realistic, continuously rotating 3D Earth at the centre of the screen.
+
+The globe should feature:
+- Realistic continents and oceans.
+- Detailed cloud textures.
+- Beautiful atmospheric blue glow.
+- Smooth continuous rotation.
+- Subtle cursor-responsive movement.
+- Realistic lighting and depth.
+
+Surround the Earth with smaller animated elements:
+- Tiny moving satellites.
+- Floating stars.
+- Subtle shooting stars.
+- Small orbital paths.
+- Slowly moving space particles.
+
+The satellites should move along subtle orbital paths without distracting from the Earth.
+
+### Main headline
+
+Display this exact headline in large, bold, elegant typography:
+
+**THE EARTH IS SPEAKING.  
+ARE WE OBSERVING?**
+
+Supporting line:
+
+"Decoding the patterns of a living planet."
+
+Add one prominent button:
+
+**EXPLORE THE EARTH →**
+
+### Button interactions
+
+- Make the button large and visually prominent.
+- Enlarge it slightly when the cursor hovers over it.
+- Add a subtle magnetic cursor effect.
+- Add a smooth glowing border.
+- Include an animated arrow.
+- Give it a satisfying click interaction.
+- Clicking it should smoothly scroll to the second section.
+
+Keep this first section minimal. The globe and headline must dominate the screen.
+
+---
+
+# 2. SECOND SECTION — ENVIRONMENTAL INVESTIGATIONS
+
+Create a beautiful transition into a futuristic environmental investigation dashboard.
+
+Main heading:
+
+**THE PLANET LEAVES CLUES. WE INVESTIGATE.**
+
+Short introduction:
+
+"Explore the environmental signals that reveal how our planet is changing."
+
+### IMPORTANT LAYOUT REQUIREMENT
+
+Create EXACTLY THREE large investigation panels arranged VERTICALLY, one below another.
+
+Do NOT create six separate cards.
+
+Use a sophisticated two-column layout:
+
+LEFT COLUMN:
+Three vertically stacked investigation panels.
+
+RIGHT COLUMN:
+A dedicated interactive information area titled:
+
+**LEARN ABOUT THIS**
+
+The Learn About This area should dynamically update when a user selects or hovers over an investigation panel.
+
+### INVESTIGATION 01 — TEMPERATURE & OZONE
+
+Visual direction:
+- Realistic Earth temperature heatmaps.
+- Red, orange and blue temperature patterns.
+- Atmospheric ozone visualisations.
+- Satellite observation imagery.
+
+Description:
+
+"Investigate changing temperatures and ozone concentration across our planet."
+
+### INVESTIGATION 02 — WATER, RAINFALL & VEGETATION
+
+Visual direction:
+- Oceans, rivers and flowing water.
+- Rainfall and cloud patterns.
+- Satellite forest imagery.
+- Green and blue environmental visualisations.
+
+Description:
+
+"Explore changing rainfall patterns, water conditions and vegetation across different regions."
+
+### INVESTIGATION 03 — AIR QUALITY & POLLUTION
+
+Visual direction:
+- Atmospheric haze.
+- City and environmental imagery.
+- Air-quality indicators.
+- Satellite-based pollution visualisations.
+
+Description:
+
+"Examine air quality and investigate changes in environmental pollution indicators."
+
+### PANEL INTERACTIONS
+
+Each investigation panel should include:
+- Investigation number.
+- Distinctive environmental imagery.
+- Short description.
+- Small animated signal indicator.
+- INVESTIGATE button or arrow.
+
+When hovered over:
+- Slightly enlarge and lift the panel.
+- Animate the background image.
+- Add subtle 3D depth.
+- Create elegant glowing borders.
+- Change the surrounding background colours smoothly.
+- Highlight the selected panel.
+
+### LEARN ABOUT THIS COLUMN
+
+When a panel is selected, dynamically display:
+
+- What the variables mean.
+- Why scientists study them.
+- What satellite observations reveal.
+- Why long-term trends matter.
+
+Keep the information concise, meaningful and scientifically accurate.
+
+On mobile, stack the information below the selected investigation panel.
+
+---
+
+# 3. THIRD SECTION — THE INVESTIGATION QUESTIONS
+
+This section should create curiosity and make visitors feel like scientific detectives.
+
+Main heading:
+
+**SOMEWHERE ON EARTH, SOMETHING IS CHANGING. WHY?**
+
+Supporting line:
+
+"Every unusual pattern raises a question. Every question begins an investigation."
+
+Create a cinematic investigation interface with location-based environmental questions.
+
+### TEMPERATURE
+- Why is one region hotter than surrounding areas?
+- Are temperatures increasing over the years?
+- Are some regions warming faster than others?
+
+### WATER & RAINFALL
+- Why does one region receive abundant rainfall while another experiences drought?
+- Are rainfall patterns changing over time?
+- What do long-term water observations reveal?
+
+### VEGETATION
+- Why is vegetation changing in certain regions?
+- Are some landscapes becoming greener or losing vegetation?
+
+### AIR QUALITY & POLLUTION
+- Why do air-quality patterns differ between regions?
+- Are pollution indicators increasing or decreasing?
+
+### OZONE
+- How does ozone concentration vary across different regions?
+- What patterns can long-term observations reveal?
+
+### VISUAL DESIGN
+
+Make this section resemble a futuristic scientific investigation control centre.
+
+Include:
+- Dark satellite-map-inspired backgrounds.
+- Subtle location markers.
+- Animated scanning lines.
+- Glowing investigation indicators.
+- Elegant question panels.
+- Subtle data visualisation elements.
+
+Add a prominent button:
+
+**DIVE INTO THE INVESTIGATION →**
+
+This button should eventually connect to our actual investigation experience.
+
+IMPORTANT:
+These are investigation questions, not confirmed scientific findings. Do not invent locations, environmental statistics or NASA findings.
+
+---
+
+# 4. FOURTH SECTION — MEET VOLTZ 7
+
+Create a sophisticated final team section with a dark space background.
+
+Main heading:
+
+**THE MINDS BEHIND THE MISSION**
+
+Supporting line:
+
+"Curiosity brought us together. Science drives our exploration."
+
+Display our team identity prominently:
+
+**VOLTZ 7**
+
+Project description:
+
+"We explore Earth's changing environmental systems through satellite observations, data visualisation and scientific trend analysis."
+
+### GITHUB AND TEAM INFORMATION
+
+Include:
+
+1. A prominent button linking to our project GitHub repository.
+2. Individual GitHub profile links for every team member.
+3. Team members' names and GitHub usernames.
+
+Use editable placeholders for:
+- Team members' names.
+- GitHub usernames.
+- GitHub profile links.
+- Project repository link.
+
+Do not invent names or URLs.
+
+Make the buttons interactive with subtle hover animations.
+
+### FOOTER
+
+VOLTZ 7 | NASA SPACE APPS CHALLENGE
+
+Include the project repository link and team GitHub profiles.
+
+---
+
+# GLOBAL DESIGN REQUIREMENTS
+
+Maintain a consistent, elegant, dark space-inspired visual identity.
+
+Use:
+- Deep black and midnight blue.
+- Subtle cyan and electric blue accents.
+- Sophisticated white typography.
+- Realistic Earth and satellite visuals.
+- Smooth vertical scrolling.
+- Cinematic section transitions.
+- Floating particles and animated stars.
+- Magnetic buttons.
+- Beautiful hover effects.
+- Responsive layouts.
+
+Avoid:
+- Excessive neon colours.
+- Too many floating objects.
+- Generic AI-generated illustrations.
+- Repetitive card designs.
+- Unnecessary text.
+- Fake scientific data.
+- Overloaded layouts.
+
+The website should feel authentic, realistic and professionally designed rather than like a generic AI-generated template.
+
+---
+
+# TECHNICAL REQUIREMENTS
+
+- Work with the existing framework and project structure.
+- Use React and the existing dependencies wherever possible.
+- Use Three.js or React Three Fiber for a genuine 3D rotating Earth.
+- Use Tailwind CSS and custom CSS animations where appropriate.
+- Keep code organised and components reusable.
+- Make every button and navigation link functional.
+- Implement smooth scrolling.
+- Optimise 3D rendering and animations.
+- Ensure desktop, tablet and mobile responsiveness.
+- Provide accessible keyboard and touch interactions.
+- Do not leave unfinished or non-functional elements.
+- Do not replace the 3D globe with a static image.
+
+---
+
+# FINAL CREATIVE VISION
+
+The visitor journey must be:
+
+**SECTION 1 — WONDER**
+A magnificent rotating Earth with the headline:
+"The Earth is speaking. Are we observing?"
+
+**SECTION 2 — CURIOSITY**
+Three vertically stacked environmental investigation panels with an interactive Learn About This column.
+
+**SECTION 3 — INVESTIGATION**
+Interesting environmental questions that encourage visitors to explore the reasons behind Earth's changing patterns.
+
+**SECTION 4 — IDENTITY**
+Introduce the team VOLTZ 7 and provide GitHub repository and member profile links.
+
+The overall experience should feel like entering a futuristic Earth observation laboratory.
+
+**VOLTZ 7 — OBSERVE THE PLANET. QUESTION THE PATTERNS. INVESTIGATE THE CHANGE.**
+
+Prioritise visual quality, scientific credibility, smooth interactions and a memorable user experience.
